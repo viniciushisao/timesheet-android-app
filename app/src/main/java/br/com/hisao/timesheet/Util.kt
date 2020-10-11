@@ -1,5 +1,7 @@
 package br.com.hisao.timesheet
 
+import br.com.hisao.timesheet.model.TimeSheetData
+import br.com.hisao.timesheet.model.TimeSheetDataType
 import java.util.*
 
 fun Calendar?.getFormattedDate(): String {
@@ -10,7 +12,6 @@ fun Calendar?.getFormattedDate(): String {
 
         return day.toString() + "/" + month.getMonth() + "/" + year.toString()
     }
-
     return ""
 }
 
@@ -34,5 +35,19 @@ fun Int?.getMonth(): String {
         }
     }
     return ""
+}
+
+fun Long.getTimeSheetData(type : TimeSheetDataType): TimeSheetData {
+
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = this
+    val day = calendar.get(Calendar.DATE)
+    val month = calendar.get(Calendar.MONTH)
+    val year = calendar.get(Calendar.YEAR)
+    val hour24 = calendar.get(Calendar.HOUR_OF_DAY)
+    val minute = calendar.get(Calendar.MINUTE)
+    return TimeSheetData(0, type.name, year, month, day, hour24, minute)
 
 }
+
+

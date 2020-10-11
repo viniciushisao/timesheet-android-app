@@ -10,7 +10,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainFragment">
+        tools:context=".main.MainFragment">
+
+        <TextView
+            android:id="@+id/lbl_currenttime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current date/time: "
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <android.widget.TextClock
+            android:id="@+id/digitalClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:format12Hour="dd MMM yyyy hh:mm:ss a"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/lbl_currenttime"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_startstop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lbl_currenttime" />
+
+        <TextView
+            android:id="@+id/txt_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_startstop" />
 
         <Button
             android:id="@+id/open_calendar"
