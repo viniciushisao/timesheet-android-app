@@ -22,12 +22,10 @@ class DatePickerFragment(private val listener: OnDateSetListener) : DialogFragme
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, day)
-        listener.onDateSet(calendar)
+        listener.onDateSet(year, month + 1, day)
     }
 }
 
 interface OnDateSetListener {
-    fun onDateSet(calendar: Calendar)
+    fun onDateSet(year: Int, month: Int, day: Int)
 }

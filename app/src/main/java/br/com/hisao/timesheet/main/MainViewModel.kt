@@ -12,7 +12,7 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val allTimeSheetDataLiveData: LiveData<Resource<List<TimeSheetData>>>
-        get() = repository.allTimeSheetRepositoryMutableLiveData
+        get() = repository.allTimeSheetListRepositoryMutableLiveData
 
     val lastEntryLiveData: LiveData<Resource<TimeSheetData>>
         get() = repository.lastEntryRepositoryMutableLiveData

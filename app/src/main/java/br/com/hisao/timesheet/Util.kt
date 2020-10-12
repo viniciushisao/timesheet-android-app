@@ -4,11 +4,68 @@ import br.com.hisao.timesheet.model.TimeSheetData
 import br.com.hisao.timesheet.model.TimeSheetDataType
 import java.util.*
 
-fun Calendar?.getFormattedDate(): String {
+fun Calendar.getTimeSheetData(): TimeSheetData {
+    return TimeSheetData(
+        0,
+        TimeSheetDataType.START.name,
+        this.get(Calendar.YEAR),
+        this.get(Calendar.MONTH) + 1,
+        this.get(Calendar.DAY_OF_MONTH),
+        this.get(Calendar.HOUR_OF_DAY),
+        this.get(Calendar.MINUTE)
+    )
+}
+
+
+fun Calendar?.getFormattedDateType(): String {
     if (this != null) {
         val day = this.get(Calendar.DATE)
-        val month = this.get(Calendar.MONTH) + 1
+        val month = this.get(Calendar.MONTH)
         val year = this.get(Calendar.YEAR)
+
+        return day.toString() + "/" + month.getMonth() + "/" + year.toString()
+    }
+    return ""
+}
+
+/**
+ * E.g. 23:58
+ */
+fun TimeSheetData?.getFormattedTime(): String {
+    if (this != null) {
+        return "" + this.hour24 + ":" + this.minute
+    }
+    return ""
+}
+
+/**
+ * E.g. START 23/Sep/2020 23:58
+ */
+fun TimeSheetData?.getFormattedDateType(): String {
+    if (this != null) {
+        val day = this.day
+        val month = this.month
+        val year = this.year
+        var type = this.type
+
+        if (type == "STOP") type = "$type  "
+
+        return this.type + " " + day.toString() + "/" + month.getMonth() + "/" + year.toString() + " " + this.hour24 + ":" + this.minute
+    }
+    return ""
+}
+
+/**
+ * E.g 23/Oct/2020
+ */
+fun TimeSheetData?.getFormattedDate(): String {
+    if (this != null) {
+        val day = this.day
+        val month = this.month
+        val year = this.year
+        var type = this.type
+
+        if (type == "STOP") type = "$type  "
 
         return day.toString() + "/" + month.getMonth() + "/" + year.toString()
     }
@@ -37,17 +94,17 @@ fun Int?.getMonth(): String {
     return ""
 }
 
-fun Long.getTimeSheetData(type : TimeSheetDataType): TimeSheetData {
+fun Long.getTimeSheetData(type: TimeSheetDataType): TimeSheetData {
 
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = this
-    val day = calendar.get(Calendar.DATE)
-    val month = calendar.get(Calendar.MONTH)
-    val year = calendar.get(Calendar.YEAR)
-    val hour24 = calendar.get(Calendar.HOUR_OF_DAY)
-    val minute = calendar.get(Calendar.MINUTE)
+    val timeSheetData = calendar.getTimeSheetData()
+    val day = timeSheetData.day
+    val month = timeSheetData.month
+    val year = timeSheetData.year
+    val hour24 = timeSheetData.hour24
+    val minute = timeSheetData.minute
     return TimeSheetData(0, type.name, year, month, day, hour24, minute)
-
 }
 
 

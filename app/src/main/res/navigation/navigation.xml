@@ -16,15 +16,27 @@
     </fragment>
     <fragment
         android:id="@+id/reportFragment"
-        android:name="br.com.hisao.timesheet.ReportFragment"
+        android:name="br.com.hisao.timesheet.report.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" >
         <action
             android:id="@+id/action_reportFragment_to_datePickerFragment"
             app:destination="@id/datePickerFragment" />
+        <action
+            android:id="@+id/action_reportFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/datePickerFragment"
         android:name="br.com.hisao.timesheet.DatePickerFragment"
         android:label="DatePickerFragment" />
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="br.com.hisao.timesheet.edit.EditFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
 </navigation>

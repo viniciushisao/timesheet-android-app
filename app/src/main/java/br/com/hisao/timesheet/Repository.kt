@@ -16,19 +16,46 @@ class Repository @Inject constructor(
     private val timeSheetDao: TimeSheetDao
 ) {
 
-    val allTimeSheetRepositoryMutableLiveData = MutableLiveData<Resource<List<TimeSheetData>>>()
+    val allTimeSheetListRepositoryMutableLiveData = MutableLiveData<Resource<List<TimeSheetData>>>()
     val lastEntryRepositoryMutableLiveData = MutableLiveData<Resource<TimeSheetData>>()
+    val timeSheetDataListRepositoryMutableLiveData =
+        MutableLiveData<Resource<List<TimeSheetData>>>()
+    val entryRepositoryMutableLiveData = MutableLiveData<Resource<TimeSheetData>>()
+
 
     fun fetchAllTimeSheetData() {
-        allTimeSheetRepositoryMutableLiveData.postValue(Resource.loading(null))
+        allTimeSheetListRepositoryMutableLiveData.postValue(Resource.loading(null))
         coroutineScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) {
                     timeSheetDao.getAllTimeSheetData()
                 }
-                allTimeSheetRepositoryMutableLiveData.postValue(Resource.success(result))
+                allTimeSheetListRepositoryMutableLiveData.postValue(Resource.success(result))
             } catch (ex: Exception) {
-                allTimeSheetRepositoryMutableLiveData.postValue(
+                allTimeSheetListRepositoryMutableLiveData.postValue(
+                    Resource.error(
+                        ex.localizedMessage ?: "",
+                        null
+                    )
+                )
+            }
+        }
+    }
+
+    fun fetchTimeSheetData(timeSheetData: TimeSheetData) {
+        timeSheetDataListRepositoryMutableLiveData.postValue(Resource.loading(null))
+        coroutineScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    timeSheetDao.getTimeSheetDataList(
+                        timeSheetData.day,
+                        timeSheetData.month,
+                        timeSheetData.year
+                    )
+                }
+                timeSheetDataListRepositoryMutableLiveData.postValue(Resource.success(result))
+            } catch (ex: Exception) {
+                timeSheetDataListRepositoryMutableLiveData.postValue(
                     Resource.error(
                         ex.localizedMessage ?: "",
                         null
@@ -43,6 +70,49 @@ class Repository @Inject constructor(
             try {
                 withContext(Dispatchers.IO) {
                     timeSheetDao.insert(timeSheetData)
+                }
+            } catch (ex: Exception) {
+                //TODO
+            }
+        }
+    }
+
+    fun updateTimeSheet(timeSheetData: TimeSheetData) {
+        coroutineScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    timeSheetDao.update(timeSheetData)
+                }
+            } catch (ex: Exception) {
+                //TODO
+            }
+        }
+    }
+
+    fun fetchTimeSheetData(id: Long) {
+        entryRepositoryMutableLiveData.postValue(Resource.loading(null))
+        coroutineScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    timeSheetDao.getTimeSheetData(id)
+                }
+                entryRepositoryMutableLiveData.postValue(Resource.success(result))
+            } catch (ex: Exception) {
+                entryRepositoryMutableLiveData.postValue(
+                    Resource.error(
+                        ex.localizedMessage ?: "",
+                        null
+                    )
+                )
+            }
+        }
+    }
+
+    fun delete(id: Long) {
+        coroutineScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    timeSheetDao.delete(id)
                 }
             } catch (ex: Exception) {
                 //TODO

@@ -10,13 +10,14 @@ import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import br.com.hisao.timesheet.R
 import br.com.hisao.timesheet.databinding.FragmentMainBinding
+import br.com.hisao.timesheet.getFormattedDateType
 import br.com.hisao.timesheet.getTimeSheetData
 import br.com.hisao.timesheet.model.Status
 import br.com.hisao.timesheet.model.TimeSheetDataType
 
 class MainFragment : Fragment() {
 
-    private var currentTimeSheetDataType = TimeSheetDataType.UNDEFINED
+    private var currentTimeSheetDataType = TimeSheetDataType.START
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,16 +66,15 @@ class MainFragment : Fragment() {
                         binding.btnStartstop.text = getNextTimeSheetType().name
                         binding.btnStartstop.isClickable = true
                         binding.btnStartstop.isEnabled = true
-
                     }
                 }
                 Status.ERROR -> {
-                    currentTimeSheetDataType = TimeSheetDataType.UNDEFINED
+                    currentTimeSheetDataType = TimeSheetDataType.START
                     binding.btnStartstop.text = currentTimeSheetDataType.name
 
                 }
                 Status.LOADING -> {
-                    currentTimeSheetDataType = TimeSheetDataType.UNDEFINED
+                    currentTimeSheetDataType = TimeSheetDataType.START
                 }
             }
         }
@@ -87,7 +87,7 @@ class MainFragment : Fragment() {
 
                         val sb = StringBuffer()
                         for (i in it.data!!) {
-                            sb.append(i)
+                            sb.append(i.getFormattedDateType())
                             sb.append("\n")
                         }
 

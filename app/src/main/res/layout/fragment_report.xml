@@ -10,23 +10,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ReportFragment">
+        tools:context=".report.ReportFragment">
+
+        <TextView
+            android:id="@+id/lbl_selectdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected Date: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lbl_selecteddate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="faklsfkajhsdfksdf"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/lbl_selectdate"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_selectdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick other date"
+            android:text="Select date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lbl_selecteddate" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/report_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/darker_gray"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_selectdate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

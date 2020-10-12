@@ -8,13 +8,18 @@ import androidx.room.PrimaryKey
 data class TimeSheetData(
     @PrimaryKey(autoGenerate = true)
     val id: Long,
-    //TODO transform it in enum
-    val type: String,
+    var type: String,
+    var year: Int,
+    var month: Int,
+    var day: Int,
+    var hour24: Int,
+    var minute: Int
+) {
+    companion object {
+        fun getDummy(): TimeSheetData {
+            return TimeSheetData(0, "", 0, 0, 0, 0, 0)
+        }
+    }
+}
 
-    val year: Int,
-    val month: Int,
-    val day: Int,
-    val hour24: Int,
-    val minute: Int
 
-)
