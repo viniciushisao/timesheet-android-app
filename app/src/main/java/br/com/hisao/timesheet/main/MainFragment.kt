@@ -18,7 +18,7 @@ import br.com.hisao.timesheet.model.TimeSheetDataType
 class MainFragment : Fragment() {
 
     private var currentTimeSheetDataType = TimeSheetDataType.START
-    private val LIMIT = 20
+    private val limit = 20
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
 //        viewModel.clearAllTimeSheetData()
 
         viewModel.fetchLastEntry()
-        viewModel.fetchLimitTimeSheetData(LIMIT)
+        viewModel.fetchLimitTimeSheetData(limit)
 
         return binding.root
     }
@@ -90,21 +90,20 @@ class MainFragment : Fragment() {
             }
         }
 
-        viewModel.allTimeSheetDataLiveData.observe(viewLifecycleOwner) {
-
+        viewModel.timeSheetLimitDataLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.let {
-                        val back = it.data!!.asReversed()
+
                         val sb = StringBuffer()
-                        for (i in back) {
+                        for (i in it.data!!) {
                             sb.append("id: ")
                             sb.append(i.id)
                             sb.append(" ")
                             sb.append(i.getFormattedDateType())
                             sb.append("\n")
                         }
-
+                        binding.txtShowingmessages.text = it.data.size.toString()
                         binding.txtAll.text = sb.toString()
                     }
                 }
@@ -122,12 +121,12 @@ class MainFragment : Fragment() {
         binding.openCalendar.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mainFragment_to_reportFragment)
         }
-        binding.btnStartstop.setOnClickListener(View.OnClickListener {
+        binding.btnStartstop.setOnClickListener {
             val current = System.currentTimeMillis()
             viewModel.addTimeSheetData(current.getTimeSheetData(currentTimeSheetDataType))
-            viewModel.fetchLimitTimeSheetData(LIMIT)
+            viewModel.fetchLimitTimeSheetData(limit)
             binding.btnStartstop.text = getNextTimeSheetType().name
-        })
+        }
     }
 
 }

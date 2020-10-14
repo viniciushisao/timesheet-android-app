@@ -1,5 +1,6 @@
 package br.com.hisao.timesheet.edit
 
+//TODO
 import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +21,6 @@ import br.com.hisao.timesheet.model.TimeSheetData
 import br.com.hisao.timesheet.model.TimeSheetDataType
 import br.com.hisao.timesheet.util.getFormattedDate
 import br.com.hisao.timesheet.util.getFormattedTime
-
 
 class EditFragment : DialogFragment(), AdapterView.OnItemSelectedListener {
     private val args: EditFragmentArgs by navArgs()

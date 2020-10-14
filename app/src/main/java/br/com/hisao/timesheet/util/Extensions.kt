@@ -16,19 +16,6 @@ fun Calendar.getTimeSheetData(): TimeSheetData {
     )
 }
 
-fun Calendar?.getFormattedDateType(): String {
-    if (this != null) {
-        val day = this.get(Calendar.DATE)
-        val month = this.get(Calendar.MONTH)
-        val year = this.get(Calendar.YEAR)
-
-        return day.toString() + "/" + month.getMonth() + "/" + year.toString()
-    }
-    return ""
-}
-
-
-
 /**
  * E.g. 23:58
  */

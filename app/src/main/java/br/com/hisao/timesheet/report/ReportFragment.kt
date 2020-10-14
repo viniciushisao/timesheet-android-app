@@ -13,11 +13,10 @@ import androidx.navigation.findNavController
 import br.com.hisao.timesheet.DatePickerFragment
 import br.com.hisao.timesheet.OnDateSetListener
 import br.com.hisao.timesheet.databinding.FragmentReportBinding
-import br.com.hisao.timesheet.util.getFormattedDate
 import br.com.hisao.timesheet.model.Status
 import br.com.hisao.timesheet.model.TimeSheetData
 import br.com.hisao.timesheet.util.TimeSheetDataUtil
-import kotlin.math.min
+import br.com.hisao.timesheet.util.getFormattedDate
 
 class ReportFragment : Fragment(), ReportAdapterCallback {
 

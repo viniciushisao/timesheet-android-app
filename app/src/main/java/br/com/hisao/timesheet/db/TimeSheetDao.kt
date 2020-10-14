@@ -18,10 +18,7 @@ interface TimeSheetDao {
     @Query("DELETE FROM time_sheet_data")
     fun clear()
 
-    @Query("SELECT * FROM time_sheet_data")
-    fun getAllTimeSheetData(): List<TimeSheetData>
-
-    @Query("SELECT * FROM time_sheet_data LIMIT :limit")
+    @Query("SELECT * FROM time_sheet_data ORDER BY id DESC LIMIT :limit")
     fun getLimitTimeSheetData(limit: Int): List<TimeSheetData>
 
     @Query("SELECT * FROM time_sheet_data WHERE id LIKE :id")
