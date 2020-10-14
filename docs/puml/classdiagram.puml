@@ -3,26 +3,26 @@
 class Repository << (S,#FF7700) Singleton >>
 class Repository
     note right: Dependency Injection \n using Dagger2
-package Cloud <<Cloud>> {
-}
-package Database <<Database>> {
+
+package RoomDatabase <<Database>> {
 }
 
+MainActivity  --*  MainFragment : contains
+MainActivity  --*  ReportFragment : contains
+ReportFragment --* ReportViewModel :  contains
+EditFragment --* EditViewModel :  contains
+MainActivity  --*  EditFragment : contains
 
-AppCompatActivity <|-- MainActivity   : Extends
-MainActivity  --*  OverviewFragment : contains
-MainActivity  --*  DetailsFragment : contains
-DetailsFragment --* DetailsViewModel :  contains
-DetailsFragment <..> DetailsViewModel :  LiveData
-OverviewFragment --* OverviewViewModel : contains
-OverviewFragment <..> OverviewViewModel : LiveData
-ViewModel <|-- OverviewViewModel: extends
-ViewModel <|-- DetailsViewModel: extends
-DetailsViewModel --* Repository : contains
-OverviewViewModel --* Repository : contains
-Repository --* WebService : contains
-Repository --* LocalStorage : contains
-WebService --> Cloud :Retrofit
-LocalStorage --> Database: room
+EditFragment <..> EditViewModel :  LiveData
+ReportFragment <..> ReportViewModel :  LiveData
+MainFragment <..> MainViewModel : LiveData
+MainFragment --* MainViewModel : contains
+
+ReportViewModel --* Repository : contains
+MainViewModel --* Repository : contains
+EditViewModel --* Repository : contains
+
+Repository --* RoomDatabase: contains
+
 
 @enduml
