@@ -13,9 +13,11 @@ import androidx.navigation.findNavController
 import br.com.hisao.timesheet.DatePickerFragment
 import br.com.hisao.timesheet.OnDateSetListener
 import br.com.hisao.timesheet.databinding.FragmentReportBinding
-import br.com.hisao.timesheet.getFormattedDate
+import br.com.hisao.timesheet.util.getFormattedDate
 import br.com.hisao.timesheet.model.Status
 import br.com.hisao.timesheet.model.TimeSheetData
+import br.com.hisao.timesheet.util.TimeSheetDataUtil
+import kotlin.math.min
 
 class ReportFragment : Fragment(), ReportAdapterCallback {
 
@@ -61,11 +63,19 @@ class ReportFragment : Fragment(), ReportAdapterCallback {
             binding.lblSelecteddate.text = it.getFormattedDate()
         }
 
-        viewModel.timeSheetDataListRepositoryLiveData.observe(viewLifecycleOwner) {
+        viewModel.timeSheetDataListLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.let {
-                        adapter.submitList(it.data)
+                        val sortedList = TimeSheetDataUtil().sortList(it.data)
+                        if (TimeSheetDataUtil().isConsistent(sortedList)){
+                            val minutes = TimeSheetDataUtil().diffMinutesList(sortedList)
+                            binding.txtTimeworked.text = minutes.toString()
+                        }else{
+                            binding.txtTimeworked.text = "DATA NOT CONSISTENT"
+                        }
+
+                        adapter.submitList(sortedList)
                     }
                 }
                 Status.ERROR -> {
@@ -79,7 +89,6 @@ class ReportFragment : Fragment(), ReportAdapterCallback {
     }
 
     private fun setListeners(viewModel: ReportViewModel, binding: FragmentReportBinding) {
-
 
         binding.btnSelectdate.setOnClickListener {
             openDayPicker(viewModel)

@@ -16,23 +16,23 @@ class Repository @Inject constructor(
     private val timeSheetDao: TimeSheetDao
 ) {
 
-    val allTimeSheetListRepositoryMutableLiveData = MutableLiveData<Resource<List<TimeSheetData>>>()
+    val imeSheetLimitListRepositoryMutableLiveData = MutableLiveData<Resource<List<TimeSheetData>>>()
     val lastEntryRepositoryMutableLiveData = MutableLiveData<Resource<TimeSheetData>>()
     val timeSheetDataListRepositoryMutableLiveData =
         MutableLiveData<Resource<List<TimeSheetData>>>()
     val entryRepositoryMutableLiveData = MutableLiveData<Resource<TimeSheetData>>()
 
 
-    fun fetchAllTimeSheetData() {
-        allTimeSheetListRepositoryMutableLiveData.postValue(Resource.loading(null))
+    fun fetchLimitTimeSheetData(limit: Int) {
+        imeSheetLimitListRepositoryMutableLiveData.postValue(Resource.loading(null))
         coroutineScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) {
                     timeSheetDao.getAllTimeSheetData()
                 }
-                allTimeSheetListRepositoryMutableLiveData.postValue(Resource.success(result))
+                imeSheetLimitListRepositoryMutableLiveData.postValue(Resource.success(result))
             } catch (ex: Exception) {
-                allTimeSheetListRepositoryMutableLiveData.postValue(
+                imeSheetLimitListRepositoryMutableLiveData.postValue(
                     Resource.error(
                         ex.localizedMessage ?: "",
                         null

@@ -21,6 +21,9 @@ interface TimeSheetDao {
     @Query("SELECT * FROM time_sheet_data")
     fun getAllTimeSheetData(): List<TimeSheetData>
 
+    @Query("SELECT * FROM time_sheet_data LIMIT :limit")
+    fun getLimitTimeSheetData(limit: Int): List<TimeSheetData>
+
     @Query("SELECT * FROM time_sheet_data WHERE id LIKE :id")
     fun getTimeSheetData(id: Long): TimeSheetData
 

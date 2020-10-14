@@ -2,13 +2,12 @@ package br.com.hisao.timesheet.report
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.hisao.timesheet.databinding.ListReportadapterItemBinding
-import br.com.hisao.timesheet.getFormattedDateType
+import br.com.hisao.timesheet.util.getFormattedDateType
 import br.com.hisao.timesheet.model.TimeSheetData
 
 

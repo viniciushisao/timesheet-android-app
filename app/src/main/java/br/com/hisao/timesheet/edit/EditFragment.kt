@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +18,8 @@ import br.com.hisao.timesheet.databinding.FragmentEditBinding
 import br.com.hisao.timesheet.model.Status
 import br.com.hisao.timesheet.model.TimeSheetData
 import br.com.hisao.timesheet.model.TimeSheetDataType
-import java.util.*
+import br.com.hisao.timesheet.util.getFormattedDate
+import br.com.hisao.timesheet.util.getFormattedTime
 
 
 class EditFragment : DialogFragment(), AdapterView.OnItemSelectedListener {

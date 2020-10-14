@@ -12,7 +12,7 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val allTimeSheetDataLiveData: LiveData<Resource<List<TimeSheetData>>>
-        get() = repository.allTimeSheetListRepositoryMutableLiveData
+        get() = repository.imeSheetLimitListRepositoryMutableLiveData
 
     val lastEntryLiveData: LiveData<Resource<TimeSheetData>>
         get() = repository.lastEntryRepositoryMutableLiveData
@@ -22,8 +22,8 @@ class MainViewModel @Inject constructor(
         repository.addTimeSheet(timeSheetData)
     }
 
-    fun fetchAllTimeSheetData() {
-        repository.fetchAllTimeSheetData()
+    fun fetchLimitTimeSheetData(limit: Int) {
+        repository.fetchLimitTimeSheetData(limit)
     }
 
     fun clearAllTimeSheetData() {

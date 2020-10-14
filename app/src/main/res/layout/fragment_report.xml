@@ -36,6 +36,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lbl_selecteddate" />
 
+        <TextView
+            android:id="@+id/lbl_timeworked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Time worked: "
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_selectdate" />
+
+
+        <TextView
+            android:id="@+id/txt_timeworked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23h 10m"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/lbl_timeworked"
+            app:layout_constraintTop_toBottomOf="@id/btn_selectdate" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/report_list"
             android:layout_width="match_parent"
@@ -45,7 +64,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_selectdate" />
+            app:layout_constraintTop_toBottomOf="@id/lbl_timeworked" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

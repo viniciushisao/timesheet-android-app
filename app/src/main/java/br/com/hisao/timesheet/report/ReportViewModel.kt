@@ -16,7 +16,7 @@ class ReportViewModel @Inject constructor(
     val currentDate: LiveData<TimeSheetData>
         get() = _currentPickDate
 
-    val timeSheetDataListRepositoryLiveData: LiveData<Resource<List<TimeSheetData>>>
+    val timeSheetDataListLiveData: LiveData<Resource<List<TimeSheetData>>>
         get() = repository.timeSheetDataListRepositoryMutableLiveData
 
     fun onPickDate(timeSheetData: TimeSheetData) {

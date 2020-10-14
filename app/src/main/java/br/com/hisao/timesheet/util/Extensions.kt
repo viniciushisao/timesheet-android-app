@@ -1,4 +1,4 @@
-package br.com.hisao.timesheet
+package br.com.hisao.timesheet.util
 
 import br.com.hisao.timesheet.model.TimeSheetData
 import br.com.hisao.timesheet.model.TimeSheetDataType
@@ -16,7 +16,6 @@ fun Calendar.getTimeSheetData(): TimeSheetData {
     )
 }
 
-
 fun Calendar?.getFormattedDateType(): String {
     if (this != null) {
         val day = this.get(Calendar.DATE)
@@ -27,6 +26,8 @@ fun Calendar?.getFormattedDateType(): String {
     }
     return ""
 }
+
+
 
 /**
  * E.g. 23:58

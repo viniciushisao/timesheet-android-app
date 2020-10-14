@@ -57,6 +57,7 @@ dependencies {
 
     //dagger
     implementation 'com.google.dagger:dagger:2.25.4'
+    testImplementation 'junit:junit:4.12'
     kapt 'com.google.dagger:dagger-compiler:2.25.4'
 
     //coroutines

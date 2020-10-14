@@ -10,14 +10,15 @@ import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import br.com.hisao.timesheet.R
 import br.com.hisao.timesheet.databinding.FragmentMainBinding
-import br.com.hisao.timesheet.getFormattedDateType
-import br.com.hisao.timesheet.getTimeSheetData
+import br.com.hisao.timesheet.util.getFormattedDateType
+import br.com.hisao.timesheet.util.getTimeSheetData
 import br.com.hisao.timesheet.model.Status
 import br.com.hisao.timesheet.model.TimeSheetDataType
 
 class MainFragment : Fragment() {
 
     private var currentTimeSheetDataType = TimeSheetDataType.START
+    private val LIMIT = 20
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +37,24 @@ class MainFragment : Fragment() {
         setListeners(binding, viewModel)
         setObserves(binding, viewModel)
 
-        viewModel.clearAllTimeSheetData()
+        //TODO
+//        viewModel.clearAllTimeSheetData()
+
         viewModel.fetchLastEntry()
+        viewModel.fetchLimitTimeSheetData(LIMIT)
 
         return binding.root
     }
 
     private fun getNextTimeSheetType(): TimeSheetDataType {
-        return if (currentTimeSheetDataType == TimeSheetDataType.STOP) TimeSheetDataType.START else TimeSheetDataType.STOP
+        currentTimeSheetDataType =
+            if (currentTimeSheetDataType == TimeSheetDataType.STOP) TimeSheetDataType.START else TimeSheetDataType.STOP
+        return currentTimeSheetDataType
+    }
+
+    private fun setEnabledBtnStartstop(binding: FragmentMainBinding, enable: Boolean) {
+        binding.btnStartstop.isClickable = enable
+        binding.btnStartstop.isEnabled = enable
     }
 
     private fun setObserves(binding: FragmentMainBinding, viewModel: MainViewModel) {
@@ -63,17 +74,17 @@ class MainFragment : Fragment() {
                                 currentTimeSheetDataType = TimeSheetDataType.STOP
                             }
                         }
-                        binding.btnStartstop.text = getNextTimeSheetType().name
-                        binding.btnStartstop.isClickable = true
-                        binding.btnStartstop.isEnabled = true
+                        setEnabledBtnStartstop(binding, true)
+
                     }
                 }
                 Status.ERROR -> {
+                    //TODO
                     currentTimeSheetDataType = TimeSheetDataType.START
-                    binding.btnStartstop.text = currentTimeSheetDataType.name
-
+                    setEnabledBtnStartstop(binding, false)
                 }
                 Status.LOADING -> {
+                    setEnabledBtnStartstop(binding, false)
                     currentTimeSheetDataType = TimeSheetDataType.START
                 }
             }
@@ -84,9 +95,12 @@ class MainFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.let {
-
+                        val back = it.data!!.asReversed()
                         val sb = StringBuffer()
-                        for (i in it.data!!) {
+                        for (i in back) {
+                            sb.append("id: ")
+                            sb.append(i.id)
+                            sb.append(" ")
                             sb.append(i.getFormattedDateType())
                             sb.append("\n")
                         }
@@ -104,18 +118,15 @@ class MainFragment : Fragment() {
         }
     }
 
-
     private fun setListeners(binding: FragmentMainBinding, viewModel: MainViewModel) {
         binding.openCalendar.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_mainFragment_to_reportFragment)
         }
         binding.btnStartstop.setOnClickListener(View.OnClickListener {
-            binding.btnStartstop.isClickable = false
-            binding.btnStartstop.isEnabled = false
             val current = System.currentTimeMillis()
-            viewModel.addTimeSheetData(current.getTimeSheetData(getNextTimeSheetType()))
-            viewModel.fetchAllTimeSheetData()
-            viewModel.fetchLastEntry()
+            viewModel.addTimeSheetData(current.getTimeSheetData(currentTimeSheetDataType))
+            viewModel.fetchLimitTimeSheetData(LIMIT)
+            binding.btnStartstop.text = getNextTimeSheetType().name
         })
     }
 
