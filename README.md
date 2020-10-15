@@ -34,3 +34,6 @@ There is a few unit tests. Coverage is very low.ø
 This code shows only *wireframes* and focus on the background architecure.
 It is ready to receive any other format of design because it is implemented in the most simple way.
 
+## Issues
+I have seen some issues when clicking fast on save new item and sometimes when opening the app it cannot retrieve the latest item to set the new status. I took a quick look into it and maybe it is due the handling of the backpressure on room database. Need to ivestigate a further more.
+
