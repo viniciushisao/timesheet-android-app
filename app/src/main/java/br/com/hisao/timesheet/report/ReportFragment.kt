@@ -69,7 +69,7 @@ class ReportFragment : Fragment(), ReportAdapterCallback {
                         val sortedList = TimeSheetDataUtil().sortList(it.data)
                         if (TimeSheetDataUtil().isConsistent(sortedList)){
                             val minutes = TimeSheetDataUtil().diffMinutesList(sortedList)
-                            binding.txtTimeworked.text = minutes.toString()
+                            binding.txtTimeworked.text = TimeSheetDataUtil().formatMinutes(minutes)
                         }else{
                             binding.txtTimeworked.text = "DATA NOT CONSISTENT"
                         }

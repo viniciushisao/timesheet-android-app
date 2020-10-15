@@ -8,6 +8,31 @@ import kotlin.math.abs
 
 open class TimeSheetDataUtil {
 
+    fun formatMinutes(minutes: Long): String {
+        val sb = StringBuffer()
+        var mins = minutes
+        val days = mins / (60 * 24)
+        if (days > 0) {
+            sb.append(days)
+            sb.append(" days ")
+            sb.append(" ")
+            mins = (mins % (60 * 24))
+        }
+        val hours = mins / 60
+        if (hours > 0) {
+            sb.append(hours)
+            sb.append(" hours ")
+            sb.append(" ")
+            mins = (mins % (60))
+
+        }
+        sb.append(mins)
+        sb.append(" minutes")
+
+        return sb.toString()
+    }
+
+
     fun sortList(list: List<TimeSheetData>?): List<TimeSheetData> {
         if (list == null) {
             return ArrayList()
@@ -16,6 +41,7 @@ open class TimeSheetDataUtil {
             .thenBy { it.day }
             .thenBy { it.hour24 }.thenBy { it.minute }.thenBy { it.id })
     }
+
 
     /**
      * List must be ordered

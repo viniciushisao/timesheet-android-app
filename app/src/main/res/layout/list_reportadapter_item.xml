@@ -8,12 +8,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/txt_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="10/20/200"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -22,6 +25,7 @@
             android:id="@+id/btn_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Delete"
             android:textColor="@android:color/holo_red_dark"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -32,6 +36,7 @@
             android:id="@+id/btn_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Edit"
             app:layout_constraintLeft_toRightOf="@id/btn_delete"
             app:layout_constraintTop_toBottomOf="@id/txt_date" />

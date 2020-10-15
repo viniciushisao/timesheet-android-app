@@ -16,6 +16,7 @@
             android:id="@+id/lbl_selectdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Selected Date: "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,14 +25,17 @@
             android:id="@+id/lbl_selecteddate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/lbl_selectdate"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_selectdate"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Select date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lbl_selecteddate" />
@@ -40,7 +44,7 @@
             android:id="@+id/lbl_timeworked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_margin="10dp"
             android:text="Time worked: "
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_selectdate" />
@@ -50,6 +54,7 @@
             android:id="@+id/txt_timeworked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="23h 10m"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/lbl_timeworked"
@@ -59,7 +64,8 @@
             android:id="@+id/report_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@android:color/darker_gray"
+            android:layout_margin="10dp"
+
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

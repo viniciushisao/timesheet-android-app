@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
         setObserves(binding, viewModel)
 
         //TODO
-//        viewModel.clearAllTimeSheetData()
+        //viewModel.clearAllTimeSheetData()
 
         viewModel.fetchLastEntry()
         viewModel.fetchLimitTimeSheetData(limit)
@@ -75,7 +75,7 @@ class MainFragment : Fragment() {
                             }
                         }
                         setEnabledBtnStartstop(binding, true)
-
+                        binding.btnStartstop.text = getNextTimeSheetType().name
                     }
                 }
                 Status.ERROR -> {

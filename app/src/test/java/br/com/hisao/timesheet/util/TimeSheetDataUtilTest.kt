@@ -7,6 +7,26 @@ import org.junit.Assert.*
 class TimeSheetDataUtilTest {
 
     @org.junit.Test
+    fun formatMinutes() {
+
+        var mins: Long = 19000
+        var res = TimeSheetDataUtil().formatMinutes(mins)
+        System.out.println(res)
+        assertTrue(res.contains("days") && res.contains("hours") && res.contains("minutes"))
+
+        mins = Long.MAX_VALUE
+        res = TimeSheetDataUtil().formatMinutes(mins)
+        System.out.println(res)
+        assertTrue(res.contains("days") && res.contains("hours") && res.contains("minutes"))
+
+        mins = 0
+        res = TimeSheetDataUtil().formatMinutes(mins)
+        System.out.println(res)
+        assertTrue(!res.contains("days") && !res.contains("hours") && res.contains("minutes"))
+
+    }
+
+    @org.junit.Test
     fun diffMinutes() {
         var t1 = TimeSheetData(0, TimeSheetDataType.START.name, 1900, 1, 1, 1, 0)
         var t2 = TimeSheetData(0, TimeSheetDataType.START.name, 1900, 1, 1, 1, 1)

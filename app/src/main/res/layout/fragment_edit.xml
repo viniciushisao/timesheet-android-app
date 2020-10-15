@@ -16,6 +16,7 @@
             android:id="@+id/lbl_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="10/Oct/2020"
             app:layout_constraintBottom_toBottomOf="@id/btn_date"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
             android:id="@+id/btn_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Choose date"
             app:layout_constraintLeft_toRightOf="@id/lbl_date"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +35,7 @@
             android:id="@+id/lbl_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="10/Oct/2020"
             app:layout_constraintBottom_toBottomOf="@id/btn_time"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -42,6 +45,7 @@
             android:id="@+id/btn_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Choose time"
             app:layout_constraintLeft_toRightOf="@id/lbl_time"
             app:layout_constraintTop_toBottomOf="@id/btn_date" />
@@ -50,6 +54,7 @@
             android:id="@+id/lbl_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Type"
             app:layout_constraintBottom_toBottomOf="@id/spn_type"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -59,6 +64,7 @@
             android:id="@+id/spn_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             app:layout_constraintLeft_toRightOf="@id/lbl_type"
             app:layout_constraintTop_toBottomOf="@id/btn_time" />
 
@@ -66,14 +72,16 @@
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Cancel"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lbl_type" />
 
         <Button
-            android:layout_width="wrap_content"
             android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Save"
             app:layout_constraintLeft_toRightOf="@id/btn_cancel"
             app:layout_constraintTop_toBottomOf="@id/lbl_type" />
