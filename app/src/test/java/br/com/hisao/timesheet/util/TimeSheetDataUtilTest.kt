@@ -139,6 +139,10 @@ class TimeSheetDataUtilTest {
         list.add(t4)
         sortedList = TimeSheetDataUtil().sortList(list.toList())
         assertTrue(TimeSheetDataUtil().isConsistent(sortedList))
+
+        list.clear()
+        sortedList = TimeSheetDataUtil().sortList(list.toList())
+        assertTrue(TimeSheetDataUtil().isConsistent(sortedList))
     }
 
     @org.junit.Test

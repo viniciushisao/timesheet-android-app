@@ -83,6 +83,10 @@ open class TimeSheetDataUtil {
      */
     fun isConsistent(list: List<TimeSheetData>): Boolean {
 
+        if (list.isEmpty() || list.size == 1) {
+            return true
+        }
+
         var currentType = TimeSheetDataType.getId(list[0].type)
         for (i in 1 until list.size) {
             val type = TimeSheetDataType.getId(list[i].type)
