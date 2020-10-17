@@ -29,7 +29,7 @@ class ViewHolder private constructor(private val dataBinding: ListReportadapterI
     fun bind(item: TimeSheetData, reportAdapterCallback: ReportAdapterCallback) {
         dataBinding.txtDate.text = item.getFormattedDateType()
         dataBinding.btnDelete.setOnClickListener {
-            reportAdapterCallback.onDeleteItem(item.id)
+            reportAdapterCallback.onClickDelete(item.id)
         }
         dataBinding.btnEdit.setOnClickListener {
             reportAdapterCallback.onClickEdit(item.id)
@@ -56,6 +56,6 @@ class TimeSheetDiffCallback : DiffUtil.ItemCallback<TimeSheetData>() {
 }
 
 interface ReportAdapterCallback {
-    fun onDeleteItem(id: Long)
+    fun onClickDelete(id: Long)
     fun onClickEdit(id: Long)
 }

@@ -18,7 +18,6 @@ import br.com.hisao.timesheet.model.TimeSheetDataType
 class MainFragment : Fragment() {
 
     private var currentTimeSheetDataType = TimeSheetDataType.START
-    private val limit = 20
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,11 +36,8 @@ class MainFragment : Fragment() {
         setListeners(binding, viewModel)
         setObserves(binding, viewModel)
 
-        //TODO
-        //viewModel.clearAllTimeSheetData()
-
         viewModel.fetchLastEntry()
-        viewModel.fetchLimitTimeSheetData(limit)
+        viewModel.fetchLimitTimeSheetData()
 
         return binding.root
     }
@@ -67,10 +63,10 @@ class MainFragment : Fragment() {
                             it.data == null -> {
                                 currentTimeSheetDataType = TimeSheetDataType.STOP
                             }
-                            it.data.type == "START" -> {
+                            it.data.type == TimeSheetDataType.START.name -> {
                                 currentTimeSheetDataType = TimeSheetDataType.START
                             }
-                            it.data.type == "STOP" -> {
+                            it.data.type == TimeSheetDataType.STOP.name -> {
                                 currentTimeSheetDataType = TimeSheetDataType.STOP
                             }
                         }
@@ -124,7 +120,6 @@ class MainFragment : Fragment() {
         binding.btnStartstop.setOnClickListener {
             val current = System.currentTimeMillis()
             viewModel.addTimeSheetData(current.getTimeSheetData(currentTimeSheetDataType))
-            viewModel.fetchLimitTimeSheetData(limit)
             binding.btnStartstop.text = getNextTimeSheetType().name
         }
     }

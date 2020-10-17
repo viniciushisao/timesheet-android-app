@@ -115,7 +115,7 @@ class ReportFragment : Fragment(), ReportAdapterCallback {
             ?.navigate(ReportFragmentDirections.actionReportFragmentToEditFragment(id))
     }
 
-    override fun onDeleteItem(id: Long) {
+    override fun onClickDelete(id: Long) {
         mViewModel.delete(id)
         Toast.makeText(context, "id: $id deleted", Toast.LENGTH_SHORT).show()
     }

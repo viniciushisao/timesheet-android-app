@@ -16,7 +16,8 @@ class Repository @Inject constructor(
     private val timeSheetDao: TimeSheetDao
 ) {
 
-    val timeSheetLimitListRepositoryMutableLiveData = MutableLiveData<Resource<List<TimeSheetData>>>()
+    val timeSheetLimitListRepositoryMutableLiveData =
+        MutableLiveData<Resource<List<TimeSheetData>>>()
     val lastEntryRepositoryMutableLiveData = MutableLiveData<Resource<TimeSheetData>>()
     val timeSheetDataListRepositoryMutableLiveData =
         MutableLiveData<Resource<List<TimeSheetData>>>()
@@ -65,17 +66,6 @@ class Repository @Inject constructor(
         }
     }
 
-    fun addTimeSheet(timeSheetData: TimeSheetData) {
-        coroutineScope.launch {
-            try {
-                withContext(Dispatchers.IO) {
-                    timeSheetDao.insert(timeSheetData)
-                }
-            } catch (ex: Exception) {
-                //TODO
-            }
-        }
-    }
 
     fun updateTimeSheet(timeSheetData: TimeSheetData) {
         coroutineScope.launch {
@@ -108,27 +98,19 @@ class Repository @Inject constructor(
         }
     }
 
-    fun delete(id: Long) {
-        coroutineScope.launch {
-            try {
-                withContext(Dispatchers.IO) {
-                    timeSheetDao.delete(id)
-                }
-            } catch (ex: Exception) {
-                //TODO
-            }
+    suspend fun addTimeSheet(timeSheetData: TimeSheetData): Resource<Unit> {
+        return withContext(Dispatchers.IO) {
+            timeSheetDao.insert(timeSheetData)
+            Resource.success(Unit)
+            //TODO implement errors
         }
     }
 
-    fun clearAllDatabase() {
-        coroutineScope.launch {
-            try {
-                withContext(Dispatchers.IO) {
-                    timeSheetDao.clear()
-                }
-            } catch (ex: Exception) {
-                //TODO
-            }
+    suspend fun delete(id: Long): Resource<Unit> {
+        return withContext(Dispatchers.IO) {
+            timeSheetDao.delete(id)
+            Resource.success(Unit)
+            //TODO implement errors
         }
     }
 
