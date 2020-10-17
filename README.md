@@ -36,7 +36,13 @@ This code shows only *wireframes* and focus on the background architecure.
 It is ready to receive any other format of design because it is implemented in the most simple way.
 
 ## Issues
-* I have seen some issues when clicking fast on save new item and sometimes when opening the app it cannot retrieve the latest item to set the new status. I took a quick look into it and maybe it is due the handling of the backpressure on room database. Need to ivestigate a further more.
-* Sometimes, when I click in a button I have an impression that this button does not listen the event.
+* There are some points where the error handling was not implemented that is why some unexpected issues may occur.
+* Coroutines were implmented in some key points but most of then are hidden. This may generate some unpredictable concurrences failure.
 
+# Wireframes
+
+![Edit Screen](https://github.com/viniciushisao/timesheet-android-app/blob/main/docs/edit_screen.png?raw=true)
+![List Screen](https://github.com/viniciushisao/timesheet-android-app/blob/main/docs/list_screen.png?raw=true)
+![Main Screen](https://github.com/viniciushisao/timesheet-android-app/blob/main/docs/main_screen.png?raw=true)
+![Select Date Screen](https://github.com/viniciushisao/timesheet-android-app/blob/main/docs/select_date_screen.png?raw=true)
 
